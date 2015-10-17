@@ -1,4 +1,4 @@
-﻿import { Component } from 'angular2/angular2';
+﻿import { Component, Input } from 'angular2/angular2';
 import Rating = require("./ratingModel");
 
 @Component({
@@ -9,7 +9,7 @@ class Rater {
 
     private static rateCount: number = 0;
 
-    rating: Rating = null;
+    @Input() model;
     id: number;
 
     constructor() {
@@ -17,7 +17,7 @@ class Rater {
     }
 
     doAlert() {
-        alert(this.rating.title + this.rating.description);
+        alert(this.model.title + this.model.description);
     }
 }
 
