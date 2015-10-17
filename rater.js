@@ -7,6 +7,9 @@ System.register(['angular2/angular2'], function(exports_1) {
             case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
         }
     };
+    var __metadata = (this && this.__metadata) || function (k, v) {
+        if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+    };
     var angular2_1;
     var Rater;
     return {
@@ -31,7 +34,8 @@ System.register(['angular2/angular2'], function(exports_1) {
                     }),
                     angular2_1.View({
                         templateUrl: 'app/rater.html',
-                    })
+                    }), 
+                    __metadata('design:paramtypes', [])
                 ], Rater);
                 return Rater;
             })();
@@ -39,4 +43,3 @@ System.register(['angular2/angular2'], function(exports_1) {
         }
     }
 });
-//# sourceMappingURL=rater.js.map

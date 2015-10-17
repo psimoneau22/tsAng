@@ -1,4 +1,4 @@
-﻿export default class Rating {
+﻿class Rating {
 
     title: string;
     description: string;
@@ -10,3 +10,5 @@
         this.value = value;
     }
 }
+
+export = Rating;

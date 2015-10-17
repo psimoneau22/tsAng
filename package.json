@@ -1,0 +1,38 @@
+{
+  "name": "tsang",
+  "version": "1.0.0",
+  "description": "testing angular with typescript",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo 'test passed'",
+    "start": "concurrent \"npm run tsc\" \"npm run serv\"",
+    "tsc": "tsc -w",
+    "serv": "http-server -o",
+    "serv2": "live-server --open=src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/psimoneau22/tsAng.git"
+  },
+  "keywords": [
+    "typescript",
+    "angular2"
+  ],
+  "author": "Philip Simoneau",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/psimoneau22/tsAng/issues"
+  },
+  "homepage": "https://github.com/psimoneau22/tsAng#readme",
+  "dependencies": {
+    "angular2": "^2.0.0-alpha.44",
+    "systemjs": "^0.19.4"
+  },
+  "devDependencies": {
+    "concurrently": "^0.1.1",
+    "gulp": "^3.9.0",
+    "http-server": "^0.8.5",
+    "live-server": "^0.8.1",
+    "typescript": "^1.6.2"
+  }
+}
