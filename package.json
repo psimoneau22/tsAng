@@ -7,8 +7,7 @@
     "test": "echo 'test passed'",
     "start": "concurrent \"npm run tsc\" \"npm run serv\"",
     "tsc": "tsc -w",
-    "serv": "http-server -o",
-    "serv2": "live-server --open=src"
+    "serv": "live-server --open=src"
   },
   "repository": {
     "type": "git",
