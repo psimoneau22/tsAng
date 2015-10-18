@@ -15,7 +15,12 @@
   },
   "keywords": [
     "typescript",
-    "angular2"
+    "typescript 1.6",
+    "angular",
+    "angular2",
+    "angular 2.0",
+    "flux",
+    "firebase"
   ],
   "author": "Philip Simoneau",
   "license": "ISC",
