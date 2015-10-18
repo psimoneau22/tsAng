@@ -1,4 +1,5 @@
 node_modules
 .vscode
-src/app/*.js
-src/app/*.map
+app/**/*.js
+app/**/*.map
+typings

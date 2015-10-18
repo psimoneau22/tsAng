@@ -1,0 +1,14 @@
+<form class="form-inline">
+	<div class="form-group ">
+		<label for="title">Title:</label>
+		<input type="text" id="title" class="form-control" [(ng-model)]="model.title" >
+	</div>
+	<div class="form-group">
+		<label>Description:</label>
+		<input type="text" id="description" class="form-control" [(ng-model)]="model.description" >		
+	</div>
+	<div class="form-group ">
+		<button (click)="add()" class="btn btn-primary">Add</button>
+		<span><b>model</b>: {{getModelJson()}}</span>
+	</div>
+</form>

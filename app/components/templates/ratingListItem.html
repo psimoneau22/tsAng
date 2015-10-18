@@ -1,0 +1,17 @@
+﻿<div class="row">
+    <div class="col-xs-2">{{model.title}}</div>
+    <div class="col-xs-2">{{model.description}}</div>
+    <div class="col-xs-6">
+        <span  *ng-for="#star of starScale #i=index" class="glyphicon" 
+            [ng-class]="{
+                'glyphicon-star': hoverIndex >= 0 ? i <= hoverIndex : i <= model.value, 
+                'glyphicon-star-empty': hoverIndex >= 0 ? i > hoverIndex : i > model.value || model.value == null }"            
+                (mouseover)="hoverIndex=i"
+                (mouseout)="hoverIndex=-1"
+                (click)="model.value=i">
+        </span>
+    </div>
+    <div class="col-xs-2">...</div>
+</div>
+
+

@@ -1,0 +1,18 @@
+{
+  "version": "v4",
+  "repo": "borisyankov/DefinitelyTyped",
+  "ref": "master",
+  "path": "typings",
+  "bundle": "typings/tsd.d.ts",
+  "installed": {
+    "firebase/firebase.d.ts": {
+      "commit": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
+    },
+    "flux/flux.d.ts": {
+      "commit": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
+    },
+    "wolfy87-eventemitter/wolfy87-eventemitter.d.ts": {
+      "commit": "af5b8275d1f2b92738b93fddabc461fc20c553a1"
+    }
+  }
+}

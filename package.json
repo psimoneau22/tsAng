@@ -25,7 +25,11 @@
   "homepage": "https://github.com/psimoneau22/tsAng#readme",
   "dependencies": {
     "angular2": "^2.0.0-alpha.44",
-    "systemjs": "^0.19.4"
+    "bootstrap": "^3.3.5",
+    "firebase": "^2.3.1",
+    "flux": "^2.1.1",
+    "systemjs": "^0.19.4",
+    "wolfy87-eventemitter": "^4.3.0"
   },
   "devDependencies": {
     "concurrently": "^0.1.1",
