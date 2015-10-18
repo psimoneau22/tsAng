@@ -42,7 +42,7 @@ class App implements OnDestroy, OnInit {
     }
     
     onDestroy(): void {
-        console.log('destroyed app');
+        console.log('destroyed appx');
         this._ratingStore.removeChangeListener(this._onChange);
         this._ratingStore.removeErrorListener(this._onError);
     }
