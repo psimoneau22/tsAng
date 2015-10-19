@@ -8,7 +8,7 @@
                 'glyphicon-star-empty': hoverIndex >= 0 ? i > hoverIndex : i > model.value || model.value == null }"            
                 (mouseover)="hoverIndex=i"
                 (mouseout)="hoverIndex=-1"
-                (click)="model.value=i">
+                (click)="updateValue(i)">
         </span>
     </div>
     <div class="col-xs-2">...</div>

@@ -1,6 +1,7 @@
 import { Component, FORM_DIRECTIVES, CORE_DIRECTIVES } from 'angular2/angular2';
 import Rating = require('../../models/rating');
 import RatingActions = require('../../actions/ratingActions');
+import * as http from 'angular2/http'
 
 @Component({
     selector: 'rating-form',

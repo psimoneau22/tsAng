@@ -37,7 +37,7 @@ class App implements OnDestroy, OnInit {
         ratingStore.addErrorListener(this._onError);
     }   
         
-     onInit(){
+    onInit() {
         this._ratingActions.getAll();
     }
     
