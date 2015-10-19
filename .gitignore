@@ -1,5 +1,5 @@
 node_modules
-.vscode
 app/**/*.js
 app/**/*.map
 typings
+npm-debug.log
