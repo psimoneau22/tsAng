@@ -1,18 +1,16 @@
+import {Inject, Injectable} from 'angular2/angular2';
 import Firebase = require('firebase');
 import Rating = require('../models/rating');
-import RatingService from '../services/ratingService';
-import MessageConverter from './messageConverter';
 import FirebaseMessageConverter = require('./firebaseMessageConverter');
+import ApiService from '../services/apiService';
 
-class FirebaseRatingService implements RatingService {
+@Injectable()
+class FirebaseRatingService implements ApiService<Rating> {
 	
 	_firebaseRatings: Firebase;
-	_messageConverter: MessageConverter;
 	
-	constructor(messageConverter: MessageConverter) {
-		
-		this._firebaseRatings = new Firebase("https://tsang.firebaseio.com/ratings");
-		this._messageConverter = new FirebaseMessageConverter();
+	constructor(@Inject("FirebaseConfig") firebaseConfig: {baseUrl: string}) {
+		this._firebaseRatings = new Firebase(firebaseConfig.baseUrl + "/ratings");
 	}
 	
 	get(id: string): Promise<Rating> {
@@ -26,7 +24,7 @@ class FirebaseRatingService implements RatingService {
 			}, (error) => {
 				reject(error);		
 			});
-		});		
+		});
 		
 		return result;        
     }
@@ -36,7 +34,7 @@ class FirebaseRatingService implements RatingService {
 		let result: Promise<Rating[]> = new Promise<Rating[]>((resolve, reject) => {
 			this._firebaseRatings.once('value', (data) => {
 				let queryResult: Rating[] = data.val();
-				resolve(this._messageConverter.convertFromServiceArray(queryResult));
+				resolve(FirebaseMessageConverter.convertFromServiceArray(queryResult));
 			}, (error) => {
 				reject(error);		
 			});
@@ -83,14 +81,14 @@ class FirebaseRatingService implements RatingService {
 		return result;
 	}
 	
-	remove(rating: Rating): Promise<void> {
-		let result = new Promise<void>((resolve, reject) => {
+	remove(rating: Rating): Promise<Rating> {
+		let result = new Promise<Rating>((resolve, reject) => {
 			this._firebaseRatings.child(rating.id).set(null, (error) => {
 				if(error){
 					reject(error);
 				}
 				else {
-					resolve();
+					resolve(rating);
 				}
 			});			
 		});		

@@ -2,15 +2,15 @@ import {Inject} from 'angular2/angular2';
 import AppDispatcher = require('../dispatcher/appDispatcher');
 import Rating = require('../models/rating');
 import RatingActionType = require('../actions/ratingActionType');
-import RatingService from '../services/ratingService';
+import ApiService from '../services/apiService';
 
 @Inject(AppDispatcher)
 class RatingActions {
 	
 	private _dispatcher: AppDispatcher;
-	private _ratingService: RatingService;
+	private _ratingService: ApiService<Rating>;
 	
-	constructor(dispatcher: AppDispatcher, ratingService: RatingService){
+	constructor(dispatcher: AppDispatcher, @Inject("ApiService<Rating>") ratingService: ApiService<Rating>){
 		this._dispatcher = dispatcher;
 		this._ratingService = ratingService;
 	}
@@ -44,6 +44,23 @@ class RatingActions {
 			(result) => {
 				this._dispatcher.handleViewAction({
 					actionType: RatingActionType.Update,
+					rating: result
+				});
+			},
+			(error) => {
+				this.error(error);
+        	}
+		).catch((reason) => {
+			this.error(reason);	
+		});
+	}
+	
+	delete(rating: Rating) {
+		
+		this._ratingService.remove(rating).then(
+			(result) => {
+				this._dispatcher.handleViewAction({
+					actionType: RatingActionType.Delete,
 					rating: result
 				});
 			},

@@ -1,13 +1,12 @@
 import Rating = require('../models/rating');
-import MessageConverter from './messageConverter';
 
 interface ServiceEntityWithID {
     id: string;
 }
 
-class FireBaseServiceMessageConverter implements MessageConverter {
+class FireBaseServiceMessageConverter {
 	
-	convertFromServiceArray<T extends ServiceEntityWithID>(data: Array<T>): Array<T> {
+	static convertFromServiceArray<T extends ServiceEntityWithID>(data: Array<T>): Array<T> {
         let result: Array<T> = new Array<T>();
         
         for(let key in data) {

@@ -57,6 +57,9 @@ class RatingStore extends EventEmitter {
                 break;
             case RatingActionType.Update : 
                 this.updateRating(payload.action.rating);
+                break;                
+            case RatingActionType.Delete : 
+                this.deleteRating(payload.action.rating)
                 break;
             case RatingActionType.RecievedAll : 
                 this.ratingsRecieved(payload.action.ratings);
@@ -75,12 +78,21 @@ class RatingStore extends EventEmitter {
     private updateRating(rating: Rating) {
         let ratingToUpdate = this._ratings.find((ratingToFind) => {
             return ratingToFind.id == rating.id;
-        })
+        });
         
         if(ratingToUpdate){
             ratingToUpdate = rating;
             this.emitChange();
         }        
+    }
+    
+    private deleteRating(rating: Rating) {
+        var indexToDelete = this._ratings.findIndex((ratingToFind) => {
+            return ratingToFind.id == rating.id;
+        });        
+        
+        this._ratings.splice(indexToDelete, 1);  
+        console.log('eh');    
     }
     
     private ratingsRecieved(ratings: Rating[]) {

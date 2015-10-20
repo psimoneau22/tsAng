@@ -27,6 +27,10 @@ class RatingListItem {
         this.model.value = value;
         this._ratingActions.update(this.model);
     }
+    
+    remove() {
+        this._ratingActions.delete(this.model);
+    }
 }
 
 export = RatingListItem;

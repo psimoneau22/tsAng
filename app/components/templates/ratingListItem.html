@@ -1,7 +1,10 @@
 ﻿<div class="row">
-    <div class="col-xs-2">{{model.title}}</div>
+    <div class="col-xs-1">
+        <a href="#" (click)="remove()" >Delete</a>	
+    </div>
+    <div class="col-xs-1">{{model.title}}</div>
     <div class="col-xs-2">{{model.description}}</div>
-    <div class="col-xs-6">
+    <div class="col-xs-5">
         <span  *ng-for="#star of starScale #i=index" class="glyphicon" 
             [ng-class]="{
                 'glyphicon-star': hoverIndex >= 0 ? i <= hoverIndex : i <= model.value, 
@@ -10,7 +13,7 @@
                 (mouseout)="hoverIndex=-1"
                 (click)="updateValue(i)">
         </span>
-    </div>
+    </div>    
     <div class="col-xs-2">...</div>
 </div>
 

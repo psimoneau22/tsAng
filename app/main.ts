@@ -3,20 +3,22 @@ import App = require('./components/controllers/app');
 import AppDispatcher = require('./dispatcher/appDispatcher');
 import Rating = require('./stores/ratingStore');
 import RatingStore = require('./stores/ratingStore');
-import RatingService = require('./services/ratingService');
-import MessageConverter = require('./services/messageConverter');
-import FirebaseMessageConverter = require('./services/firebaseMessageConverter');
 import FirebaseRatingService = require('./services/firebaseRatingService');
 import RatingActions = require('./actions/ratingActions');
 
+// generate unique id per user
+let appKey = "tsang_firebase_url";
+let uid = localStorage.getItem(appKey);
+if(!uid){
+	uid = Date.now();
+	localStorage.setItem(appKey, uid); 
+}
 
+let firebaseUrl = `https://tsang.firebaseio.com/${uid}/`; 
 bootstrap(App, [
 	AppDispatcher, 
-	provide(RatingService, 
-		{
-			useClass: FirebaseRatingService
-		}, deps: [provide(MessageConverter, {useClass: FirebaseMessageConverter})]),
-	provide(MessageConverter, {useClass: FirebaseMessageConverter}),  
 	RatingStore, 
-	RatingActions	
+	RatingActions,	
+	provide("ApiService<Rating>", {useClass: FirebaseRatingService}),
+	provide("FirebaseConfig", { useValue: {baseUrl: firebaseUrl }})	
 ]);
