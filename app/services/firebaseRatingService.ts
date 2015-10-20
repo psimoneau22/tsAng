@@ -1,18 +1,21 @@
+import {Inject, Injectable} from 'angular2/angular2';
 import Firebase = require('firebase');
 import Rating = require('../models/rating');
+import FirebaseMessageConverter = require('./firebaseMessageConverter');
+import ApiService from '../services/apiService';
 
-class RatingService {
+@Injectable()
+class FirebaseRatingService implements ApiService<Rating> {
 	
-	_cloudEntity: Firebase;	
+	_firebaseRatings: Firebase;
 	
-	constructor(){
-		// todo, inject
-		this._cloudEntity = new Firebase("https://tsang.firebaseio.com/ratings");		
-	}	
+	constructor(@Inject("FirebaseConfig") firebaseConfig: {baseUrl: string}) {
+		this._firebaseRatings = new Firebase(firebaseConfig.baseUrl + "/ratings");
+	}
 	
 	get(id: string): Promise<Rating> {
 		let result: Promise<Rating> = new Promise<Rating>((resolve, reject) => {
-			this._cloudEntity.child(id).once('value', (data) => {
+			this._firebaseRatings.child(id).once('value', (data) => {
 				let getResult: Rating = data.val();
 				let resultRating: Rating = new Rating(getResult.title , getResult.description,
 					getResult.value);
@@ -21,7 +24,7 @@ class RatingService {
 			}, (error) => {
 				reject(error);		
 			});
-		});		
+		});
 		
 		return result;        
     }
@@ -29,9 +32,9 @@ class RatingService {
     query(): Promise<Rating[]> {
 		
 		let result: Promise<Rating[]> = new Promise<Rating[]>((resolve, reject) => {
-			this._cloudEntity.once('value', (data) => {
+			this._firebaseRatings.once('value', (data) => {
 				let queryResult: Rating[] = data.val();
-				resolve(Rating.convertServiceArray(queryResult));
+				resolve(FirebaseMessageConverter.convertFromServiceArray(queryResult));
 			}, (error) => {
 				reject(error);		
 			});
@@ -43,7 +46,7 @@ class RatingService {
 	add(rating: Rating): Promise<Rating> {
 		
 		let result = new Promise<Rating>((resolve, reject) => {
-			let ref = this._cloudEntity.push(rating, (error) => {
+			let ref = this._firebaseRatings.push(rating, (error) => {
 				console.log(error);
 				if(error){
 					reject(error);
@@ -61,7 +64,7 @@ class RatingService {
 	update(rating: Rating): Promise<Rating> {
 		
 		let result = new Promise<Rating>((resolve, reject) => {
-			this._cloudEntity.child(rating.id).update({
+			this._firebaseRatings.child(rating.id).update({
 				title: rating.title,
 				description: rating.description,
 				value: rating.value
@@ -78,14 +81,14 @@ class RatingService {
 		return result;
 	}
 	
-	remove(rating: Rating): Promise<void> {
-		let result = new Promise<void>((resolve, reject) => {
-			this._cloudEntity.child(rating.id).set(null, (error) => {
+	remove(rating: Rating): Promise<Rating> {
+		let result = new Promise<Rating>((resolve, reject) => {
+			this._firebaseRatings.child(rating.id).set(null, (error) => {
 				if(error){
 					reject(error);
 				}
 				else {
-					resolve();
+					resolve(rating);
 				}
 			});			
 		});		
@@ -94,4 +97,4 @@ class RatingService {
 	}
 }
 
-export = RatingService;
+export = FirebaseRatingService;

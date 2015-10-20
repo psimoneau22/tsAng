@@ -1,6 +1,8 @@
 enum RatingActionType {
 	Create,
-	GetAll,
+	Update,
+	Delete,
+	RecievedAll,
 	Error
 }
 

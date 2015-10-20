@@ -1,8 +1,24 @@
-﻿import { bootstrap } from 'angular2/angular2';
+﻿import { bootstrap, provide } from 'angular2/angular2';
 import App = require('./components/controllers/app');
 import AppDispatcher = require('./dispatcher/appDispatcher');
+import Rating = require('./stores/ratingStore');
 import RatingStore = require('./stores/ratingStore');
-import RatingService = require('./services/ratingService');
+import FirebaseRatingService = require('./services/firebaseRatingService');
 import RatingActions = require('./actions/ratingActions');
 
-bootstrap(App, [AppDispatcher, RatingService, RatingStore, RatingActions]);
+// generate unique id per user
+let appKey = "tsang_firebase_url";
+let uid = localStorage.getItem(appKey);
+if(!uid){
+	uid = Date.now();
+	localStorage.setItem(appKey, uid); 
+}
+
+let firebaseUrl = `https://tsang.firebaseio.com/${uid}/`; 
+bootstrap(App, [
+	AppDispatcher, 
+	RatingStore, 
+	RatingActions,	
+	provide("ApiService<Rating>", {useClass: FirebaseRatingService}),
+	provide("FirebaseConfig", { useValue: {baseUrl: firebaseUrl }})	
+]);
