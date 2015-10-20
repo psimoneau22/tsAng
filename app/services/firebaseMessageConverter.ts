@@ -1,12 +1,8 @@
 import Rating = require('../models/rating');
 
-interface ServiceEntityWithID {
-    id: string;
-}
-
 class FireBaseServiceMessageConverter {
 	
-	static convertFromServiceArray<T extends ServiceEntityWithID>(data: Array<T>): Array<T> {
+	static convertFromServiceArray<T extends {id: string}>(data: Array<T>): Array<T> {
         let result: Array<T> = new Array<T>();
         
         for(let key in data) {

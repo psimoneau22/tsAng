@@ -4,7 +4,6 @@ import Rating = require('../models/rating');
 import FirebaseMessageConverter = require('./firebaseMessageConverter');
 import ApiService from '../services/apiService';
 
-@Injectable()
 class FirebaseRatingService implements ApiService<Rating> {
 	
 	_firebaseRatings: Firebase;

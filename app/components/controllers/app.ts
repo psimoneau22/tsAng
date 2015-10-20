@@ -26,15 +26,12 @@ class App implements OnDestroy, OnInit {
         this.ratings = [];
         
         var self = this;
-        this._onChange = (data) => {
+        ratingStore.addChangeListener((data) => {
             self.ratings = self._ratingStore.getAll(); 
-        }
-        this._onError = (errorMessage: string) => {
+        });
+        ratingStore.addErrorListener((errorMessage: string) => {
             console.log(errorMessage);
-        }
-        
-        ratingStore.addChangeListener(this._onChange);
-        ratingStore.addErrorListener(this._onError);
+        });
     }   
         
     onInit() {

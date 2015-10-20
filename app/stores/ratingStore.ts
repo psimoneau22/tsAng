@@ -91,8 +91,7 @@ class RatingStore extends EventEmitter {
             return ratingToFind.id == rating.id;
         });        
         
-        this._ratings.splice(indexToDelete, 1);  
-        console.log('eh');    
+        this._ratings.splice(indexToDelete, 1); 
     }
     
     private ratingsRecieved(ratings: Rating[]) {

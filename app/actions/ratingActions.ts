@@ -1,10 +1,10 @@
-import {Inject} from 'angular2/angular2';
+import {Inject, Injectable} from 'angular2/angular2';
 import AppDispatcher = require('../dispatcher/appDispatcher');
 import Rating = require('../models/rating');
 import RatingActionType = require('../actions/ratingActionType');
 import ApiService from '../services/apiService';
 
-@Inject(AppDispatcher)
+@Injectable()
 class RatingActions {
 	
 	private _dispatcher: AppDispatcher;
