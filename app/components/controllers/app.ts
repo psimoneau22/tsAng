@@ -35,13 +35,13 @@ class App implements OnDestroy, OnInit {
     }   
         
     onInit() {
-        this._ratingActions.getAll();
+        this._ratingActions.initApp();
     }
     
-    onDestroy(): void {
-        console.log('destroyed appx');
+    onDestroy(): void {        
         this._ratingStore.removeChangeListener(this._onChange);
         this._ratingStore.removeErrorListener(this._onError);
+        this._ratingActions.destroyApp();
     }
 }
 

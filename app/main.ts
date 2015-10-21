@@ -14,11 +14,16 @@ if(!uid){
 	localStorage.setItem(appKey, uid); 
 }
 
-let firebaseUrl = `https://tsang.firebaseio.com/${uid}/`; 
+let appConfig = {
+	useLiveUpdates: true,
+	baseUrl: `https://tsang.firebaseio.com/${uid}/`
+};
+ 
 bootstrap(App, [
 	AppDispatcher, 
 	RatingStore, 
 	RatingActions,	
 	provide("ApiService<Rating>", {useClass: FirebaseRatingService}),
-	provide("FirebaseConfig", { useValue: {baseUrl: firebaseUrl }})	
+	provide("ServiceConfig", { useValue: appConfig}),
+	provide("AppConfig", { useValue: appConfig})	
 ]);

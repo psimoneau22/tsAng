@@ -4,11 +4,16 @@ interface ApiService<T> {
 	
     query(): Promise<T[]>;
 	
-	add(rating: T): Promise<T>;
+	add(item: T): Promise<T>;
 	
-	update(rating: T): Promise<T>;
+	update(item: T): Promise<T>;
 	
-	remove(rating: T): Promise<T>; 
+	remove(item: T): Promise<T>; 
+	
+	subscribe(callback: (items: T[]) => void): void;
+	
+	unsubscribe(): void;
+	
 }
 
 export default ApiService;

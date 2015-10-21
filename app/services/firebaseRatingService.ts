@@ -6,10 +6,11 @@ import ApiService from '../services/apiService';
 
 class FirebaseRatingService implements ApiService<Rating> {
 	
-	_firebaseRatings: Firebase;
+	private _firebaseRatings: Firebase;
+	private _subscriptionToken: (snapshot: FirebaseDataSnapshot) => void;
 	
-	constructor(@Inject("FirebaseConfig") firebaseConfig: {baseUrl: string}) {
-		this._firebaseRatings = new Firebase(firebaseConfig.baseUrl + "/ratings");
+	constructor(@Inject("ServiceConfig") serviceConfig: {baseUrl: string}) {
+		this._firebaseRatings = new Firebase(serviceConfig.baseUrl + "/ratings");
 	}
 	
 	get(id: string): Promise<Rating> {
@@ -46,7 +47,6 @@ class FirebaseRatingService implements ApiService<Rating> {
 		
 		let result = new Promise<Rating>((resolve, reject) => {
 			let ref = this._firebaseRatings.push(rating, (error) => {
-				console.log(error);
 				if(error){
 					reject(error);
 				}
@@ -64,9 +64,9 @@ class FirebaseRatingService implements ApiService<Rating> {
 		
 		let result = new Promise<Rating>((resolve, reject) => {
 			this._firebaseRatings.child(rating.id).update({
-				title: rating.title,
-				description: rating.description,
-				value: rating.value
+				title: rating.title || null,
+				description: rating.description || null,
+				value: rating.value || null
 			}, (error) => {
 				if(error){
 					reject(error);
@@ -93,6 +93,17 @@ class FirebaseRatingService implements ApiService<Rating> {
 		});		
 		
 		return result;
+	}
+	
+	subscribe(callback: (ratings: Rating[]) => void) {
+		this._subscriptionToken = this._firebaseRatings.on("value", (snapshot) => {
+			let ratings : Rating[] = snapshot.val();
+			callback(FirebaseMessageConverter.convertFromServiceArray(ratings));
+		});
+	}
+	
+	unsubscribe(){
+		this._firebaseRatings.off("value", this._subscriptionToken);
 	}
 }
 
