@@ -8,7 +8,8 @@
     "start": "concurrent \"npm run tsc\" \"npm run serv\"",
     "tsc": "tsc -w",
     "serv": "live-server",
-    "postinstall": "tsd install && tsc"
+    "postinstall": "tsd install && tsc",
+    "cleanJs": "gulp cleanJs"
   },
   "repository": {
     "type": "git",
@@ -34,11 +35,13 @@
     "bootstrap": "^3.3.5",
     "firebase": "^2.3.1",
     "flux": "^2.1.1",
+    "requirejs": "^2.1.20",
     "systemjs": "^0.19.4",
     "wolfy87-eventemitter": "^4.3.0"
   },
   "devDependencies": {
     "concurrently": "^0.1.1",
+    "del": "^2.0.2",
     "live-server": "^0.8.1",
     "tsd": "^0.6.5",
     "typescript": "^1.6.2"
