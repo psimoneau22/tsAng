@@ -1,14 +1,13 @@
 <html>
 	<head>
 		<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css"></link>	
-		<link rel="stylesheet" href="app/css/app.css"></link>
-		
-		<script src="node_modules/systemjs/dist/system.js" ></script>
-		<script src="systemConfig.js"></script>
-		<script src="node_modules/angular2/bundles/angular2.js" /></script>
+		<link rel="stylesheet" href="app/css/app.css"></link>	
+			
+		<script src="node_modules/angular2/bundles/angular2.sfx.dev.js" /></script>
 	</head>
 	<body>
-		<app>Loading...</app>
-		<script>System.import('app/main');</script>
+		<app>Loading...</app>		
+		
+		<script data-main="app/main" src="node_modules/requirejs/require.js" /></script>	
 	</body>
 </html>

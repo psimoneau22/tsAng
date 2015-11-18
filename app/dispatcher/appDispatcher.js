@@ -1,6 +1,10 @@
 define(function(require) {
 	
-	var AppDispatcher = function(){ };
+	var Dispatcher = require("flux").Dispatcher;
+	
+	var AppDispatcher = function(){ };     
+    AppDispatcher.prototype = new Dispatcher();
+    AppDispatcher.prototype.constructor = AppDispatcher;
 	
 	AppDispatcher.prototype.handleViewAction = function(action) {
 		

@@ -1,24 +1,31 @@
-﻿
-define(function(require) {
+﻿define(function(require) {
     
-    get changeEvent(): string {
-        return "CHANGE";
-    }
-    get errorEvent(): string {
-        return "ERROR";
-    }
+    var RatingActionType = require('actions/RatingActionType');    
+    var EventEmitter = require("eventemitter");
     
     var RatingStore = function(dispatcher){ 
         this._dispatcher = dispatcher;
         this._ratings = [];
         
-        this.dispatcherToken = this._dispatcher.register((payload) => {
+        this.dispatcherToken = this._dispatcher.register(function(payload) {
             this.handleAction(payload);
         });
-        
-        super();
-    }; 
+    };    
     
+    RatingStore.prototype = new EventEmitter();
+    RatingStore.prototype.constructor = RatingStore;
+    
+    Object.defineProperty(RatingStore, 'changeEvent', {
+        get: function() {
+            return "CHANGE";
+        }
+    });
+    
+    Object.defineProperty(RatingStore, 'errorEvent', {
+        get: function() {
+            return "ERROR";
+        }
+    });    
     
     
     RatingStore.prototype.getAll = function() {
@@ -41,7 +48,7 @@ define(function(require) {
         this.removeListener(this.errorEvent, callback);
     }
     
-    private handleAction(payload) {
+    RatingStore.prototype.handleAction = function(payload) {
         switch(payload.action.actionType) {
             case RatingActionType.Create : 
                 this.createRating(payload.action.rating);
@@ -61,13 +68,13 @@ define(function(require) {
         }
     }
     
-    private createRating(rating) {
+    RatingStore.prototype.createRating = function(rating) {
         this._ratings.push(rating);
         this.emitChange();
     }
     
-    private updateRating(rating) {
-        let ratingToUpdate = this._ratings.find(function(ratingToFind) {
+    RatingStore.prototype.updateRating = function(rating) {
+        var ratingToUpdate = this._ratings.find(function(ratingToFind) {
             return ratingToFind.id == rating.id;
         });
         
@@ -77,7 +84,7 @@ define(function(require) {
         }        
     }
     
-    private deleteRating(rating) {
+    RatingStore.prototype.deleteRating = function(rating) {
         var indexToDelete = this._ratings.findIndex(function(ratingToFind) {
             return ratingToFind.id == rating.id;
         });        
@@ -85,18 +92,18 @@ define(function(require) {
         this._ratings.splice(indexToDelete, 1); 
     }
     
-    private ratingsRecieved(ratings) {
+    RatingStore.prototype.ratingsRecieved = function(ratings) {
         this._ratings = ratings;
         this.emitChange();        
     }
     
-    private emitChange() {
+    RatingStore.prototype.emitChange = function() {
         this.emit(this.changeEvent);
     }
     
-    private emitError(errorMessage) {
+    RatingStore.prototype.emitError = function(errorMessage) {
         this.emit(this.errorEvent, errorMessage);
-    }  
-}
-
-export = RatingStore;
+    }
+    
+    return RatingStore;  
+});

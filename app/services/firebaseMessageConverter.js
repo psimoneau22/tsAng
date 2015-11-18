@@ -2,7 +2,7 @@ define(function(require) {
 	
     var FireBaseServiceMessageConverter = function() { };
     
-	FireBaseServiceMessageConverter.convertFromServiceArray(data) {
+	FireBaseServiceMessageConverter.convertFromServiceArray = function(data) {
         var result = [];
                 
         for(var key in data) {

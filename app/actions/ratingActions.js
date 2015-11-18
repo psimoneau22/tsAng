@@ -1,12 +1,6 @@
-// import {Inject, Injectable} from 'angular2/angular2';
-// import AppDispatcher = require('../dispatcher/appDispatcher');
-// import Rating = require('../models/rating');
-// import RatingActionType = require('../actions/ratingActionType');
-// import ApiService from '../services/apiService';
-
 define(function(require){
 	
-	var RatingActionType = require("./ratingActionType");
+	var RatingActionType = require("actions/ratingActionType");
 	
 	var RatingActions = function(dispatcher, ratingService, config){
 		this._dispatcher = dispatcher;

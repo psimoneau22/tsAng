@@ -1,11 +1,17 @@
 define(function(require) {
 	
+	var Promise = require("es6-promise").Promise;
+	//var Firebase = require("firebase");
+	
+	var FirebaseMessageConverter = require("services/firebaseMessageConverter");	
+	var Rating = require("models/rating");
+	
 	var FirebaseRatingService = function(serviceConfig) {
 		this._firebaseRatings = new Firebase(serviceConfig.baseUrl + "/ratings");
 	}
 	
 	FirebaseRatingService.prototype.get = function(id) {
-		var result = new Promise<Rating>(function(resolve, reject) {
+		var result = new Promise(function(resolve, reject) {
 			this._firebaseRatings.child(id).once('value', function(data) {
 				var getResult = data.val();
 				var resultRating = new Rating(getResult.title , getResult.description,
@@ -22,11 +28,11 @@ define(function(require) {
     
     FirebaseRatingService.prototype.query = function() {
 		
-		var result = new Promise<Rating[]>(function(resolve, reject) {
+		var result = new Promise(function(resolve, reject) {
 			this._firebaseRatings.once('value', function(data) {
 				var queryResult = data.val();
 				resolve(FirebaseMessageConverter.convertFromServiceArray(queryResult));
-			}, function(error) => {
+			}, function(error) {
 				reject(error);		
 			});
 		});		
@@ -36,7 +42,7 @@ define(function(require) {
 	
 	FirebaseRatingService.prototype.add = function(rating) {
 		
-		var result = new Promise<Rating>(function(resolve, reject) => {
+		var result = new Promise(function(resolve, reject) {
 			var ref = this._firebaseRatings.push(rating, function(error) {
 				if(error){
 					reject(error);
@@ -53,7 +59,7 @@ define(function(require) {
 	
 	FirebaseRatingService.prototype.update = function(rating) {
 		
-		var result = new Promise<Rating>(function(resolve, reject) => {
+		var result = new Promise(function(resolve, reject) {
 			this._firebaseRatings.child(rating.id).update({
 				title: rating.title || null,
 				description: rating.description || null,
@@ -72,7 +78,7 @@ define(function(require) {
 	}
 	
 	FirebaseRatingService.prototype.remove = function(rating) {
-		var result = new Promise<Rating>(function(resolve, reject) => {
+		var result = new Promise(function(resolve, reject) {
 			this._firebaseRatings.child(rating.id).set(null, function(error) {
 				if(error){
 					reject(error);
