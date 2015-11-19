@@ -1,9 +1,7 @@
 ﻿define(function(require) {
     
-    var RatingForm = require("components/controllers/ratingForm");
-    var RatingList = require("components/controllers/ratingList");
-    var RatingActions = require("actions/ratingActions");
-    var RatingStore = require("stores/ratingStore");
+    var RatingForm = require("app/components/controllers/ratingForm");
+    var RatingList = require("app/components/controllers/ratingList");
     
     var App = ng
         .Component({
@@ -12,7 +10,7 @@
             directives: [ng.CORE_DIRECTIVES, RatingForm, RatingList]
         })
         .Class({
-            constructor: [RatingStore, RatingActions, function(ratingStore, ratingActions) {
+            constructor: [ng.Inject("RatingStore"), ng.Inject("RatingActions"), function(ratingStore, ratingActions) {
                 this.appName = "Ratings";
                 this._ratingStore = ratingStore;
                 this._ratingActions = ratingActions;

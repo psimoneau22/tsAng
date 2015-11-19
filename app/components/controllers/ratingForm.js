@@ -1,7 +1,7 @@
 define(function(require) {
 	
-	var Rating = require("models/rating");
-	var RatingActions = require("actions/ratingActions");
+	var Rating = require("app/models/rating");
+	var RatingActions = require("app/actions/ratingActions");
 	
 	var RatingForm = ng
 		.Component({

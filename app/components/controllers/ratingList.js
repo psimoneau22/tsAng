@@ -1,7 +1,7 @@
 define(function(require){	
 	//@Input() model: Rating[];
 	
-	var RatingListItem = require("components/controllers/ratingListItem");
+	var RatingListItem = require("app/components/controllers/ratingListItem");
 	
 	var RatingList = ng
 		.Component({

@@ -1,5 +1,5 @@
 ﻿define(function(require) {
-    var RatingActions = require("actions/ratingActions");
+    var RatingActions = require("app/actions/ratingActions");
     
     // private static rateCount: number = 0;
     // private _ratingActions: RatingActions;

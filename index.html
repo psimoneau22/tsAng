@@ -4,10 +4,23 @@
 		<link rel="stylesheet" href="app/css/app.css"></link>	
 			
 		<script src="node_modules/angular2/bundles/angular2.sfx.dev.js" /></script>
+		<script src="node_modules/requirejs/require.js" /></script>	
+		<script>
+			requirejs.config({
+				paths: {
+					//firebase: "/node_modules/firebase/lib/firebase-node",
+					"es6-promise": "/node_modules/es6-shim/es6-shim",
+					flux: "/node_modules/flux/dist/flux",
+					eventemitter: "/node_modules/wolfy87-eventemitter/eventemitter",
+					angular: "/node_modules/angular2/bundles/angular2.sfx.dev"
+				}
+			});
+		</script>		
 	</head>
 	<body>
-		<app>Loading...</app>		
-		
-		<script data-main="app/main" src="node_modules/requirejs/require.js" /></script>	
+		<app>Loading...</app>	
+		<script>
+			requirejs(["app/main"])
+		</script>
 	</body>
 </html>

@@ -2,9 +2,12 @@ define(function(require) {
 	
 	var Dispatcher = require("flux").Dispatcher;
 	
-	var AppDispatcher = function(){ };     
-    AppDispatcher.prototype = new Dispatcher();
-    AppDispatcher.prototype.constructor = AppDispatcher;
+	var AppDispatcher = ng.Class({
+		constructor: function(){ 
+			
+		},
+		extends: Dispatcher
+	});
 	
 	AppDispatcher.prototype.handleViewAction = function(action) {
 		

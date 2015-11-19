@@ -1,12 +1,16 @@
 define(function(require){
 	
-	var RatingActionType = require("actions/ratingActionType");
+	var RatingActionType = require("app/actions/ratingActionType");
 	
-	var RatingActions = function(dispatcher, ratingService, config){
-		this._dispatcher = dispatcher;
-		this._ratingService = ratingService;
-		this._config = Object.assign({ useLiveUpdates: false}, config);
-	}
+	var RatingActions = ng.Class({
+		constructor: [ng.Inject("AppDispatcher"), ng.Inject("RatingService"), ng.Inject("AppConfig"), 
+			function(dispatcher, ratingService, config){
+				this._dispatcher = dispatcher;
+				this._ratingService = ratingService;
+				this._config = Object.assign({ useLiveUpdates: false}, config);
+			}
+		]			
+	});
 	
 	RatingActions.prototype.create = function(rating){
 		this._ratingService.add(rating).then(function(result) {

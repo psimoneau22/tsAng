@@ -1,19 +1,19 @@
 ﻿define(function(require) {
     
-    var RatingActionType = require('actions/RatingActionType');    
+    var RatingActionType = require('app/actions/RatingActionType');
     var EventEmitter = require("eventemitter");
     
-    var RatingStore = function(dispatcher){ 
-        this._dispatcher = dispatcher;
-        this._ratings = [];
-        
-        this.dispatcherToken = this._dispatcher.register(function(payload) {
-            this.handleAction(payload);
-        });
-    };    
-    
-    RatingStore.prototype = new EventEmitter();
-    RatingStore.prototype.constructor = RatingStore;
+    var RatingStore = ng.Class({
+        constructor: [ng.Inject("AppDispatcher"), function(dispatcher){ 
+            this._dispatcher = dispatcher;
+            this._ratings = [];
+            
+            this.dispatcherToken = this._dispatcher.register(function(payload) {
+                this.handleAction(payload);
+            });
+        }],
+        extends: EventEmitter
+    });
     
     Object.defineProperty(RatingStore, 'changeEvent', {
         get: function() {
