@@ -1,11 +1,8 @@
 define(function(require) {
 	
-	var Promise = require("es6-promise").Promise;
-	//var Firebase = require("firebase");
-	
+	var Promise = require("es6-promise").Promise;	
 	var FirebaseMessageConverter = require("app/services/firebaseMessageConverter");	
-	var Rating = require("app/models/rating");
-	
+	var Rating = require("app/models/rating");	
 	
 	var FirebaseRatingService = ng.Class({
 		constructor: [ng.Inject("AppConfig"), function(appConfig) {

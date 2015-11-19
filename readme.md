@@ -8,5 +8,4 @@ From the command line, in an empty folder, run the following commands:
 - git clone https://github.com/psimoneau22/tsAng.git example 
 - cd example
 - npm install
-- tsd install
 - npm start

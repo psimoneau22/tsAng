@@ -10,7 +10,7 @@
             directives: [ng.CORE_DIRECTIVES, RatingForm, RatingList]
         })
         .Class({
-            constructor: [ng.Inject("RatingStore"), ng.Inject("RatingActions"), function(ratingStore, ratingActions) {
+            constructor: [ng.Inject("RatingStore"), ng.Inject("RatingActions"), function App(ratingStore, ratingActions) {
                 this.appName = "Ratings";
                 this._ratingStore = ratingStore;
                 this._ratingActions = ratingActions;
