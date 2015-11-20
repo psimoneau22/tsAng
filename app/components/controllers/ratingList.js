@@ -1,5 +1,5 @@
 define(function(require){	
-	//@Input() model: Rating[];
+	
 	
 	var RatingListItem = require("app/components/controllers/ratingListItem");
 	
@@ -11,7 +11,8 @@ define(function(require){
 		})
 		.Class({
 			constructor: function(){
-				
+				this.model = [];
+				//@Input() model: Rating[];
 			}
 		});	
 	

@@ -1,7 +1,6 @@
 define(function(require) {
 	
 	var Rating = require("app/models/rating");
-	var RatingActions = require("app/actions/ratingActions");
 	
 	var RatingForm = ng
 		.Component({
@@ -10,7 +9,7 @@ define(function(require) {
 			directives: [ng.FORM_DIRECTIVES]			
 		})
 		.Class({
-			constructor: [RatingActions, function(ratingActions){
+			constructor: [ng.Inject("RatingActions"), function(ratingActions){
 				this.model = new Rating();
 				this.ratingActions = ratingActions;
 			}],

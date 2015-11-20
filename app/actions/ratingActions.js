@@ -78,8 +78,9 @@ define(function(require){
 	}
 	
 	RatingActions.prototype.subscribe = function(){
-		this._ratingService.subscribe(function(result) {
-			this._dispatcher.handleViewAction({
+		var self = this;
+		self._ratingService.subscribe(function(result) {
+			self._dispatcher.handleViewAction({
 				actionType: RatingActionType.RecievedAll,
 				ratings: result
 			});
