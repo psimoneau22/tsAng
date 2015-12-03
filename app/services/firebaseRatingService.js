@@ -7,19 +7,23 @@ define(function(require) {
 	var FirebaseRatingService = ng.Class({
 		constructor: [ng.Inject("AppConfig"), function(appConfig) {
 			this._firebaseRatings = new Firebase(appConfig.baseUrl + "/ratings");
+			this.subscriptionTokens = {};
 		}]
 	});
 	
 	FirebaseRatingService.prototype.get = function(id) {
 		var result = new Promise(function(resolve, reject) {
+			
 			this._firebaseRatings.child(id).once('value', function(data) {
+				
 				var getResult = data.val();
 				var resultRating = new Rating(getResult.title , getResult.description,
 					getResult.value);
 				resultRating.id = getResult.id;
 				resolve(resultRating);
+				
 			}, function(error) {
-				reject(error);		
+				reject(error);
 			});
 		});
 		
@@ -52,7 +56,7 @@ define(function(require) {
 					resolve(rating);
 				}
 			});
-		});
+		}.bind(this));
 		
 		return result;
 	}
@@ -72,7 +76,7 @@ define(function(require) {
 					resolve(rating);
 				}
 			});			
-		});	
+		}.bind(this));	
 		
 		return result;
 	}
@@ -87,20 +91,26 @@ define(function(require) {
 					resolve(rating);
 				}
 			});			
-		});		
+		}.bind(this));		
 		
 		return result;
 	}
 	
 	FirebaseRatingService.prototype.subscribe = function(callback) {
-		this._subscriptionToken = this._firebaseRatings.on("value", function(snapshot) {
+		this._subscriptionToken["value"] = this._firebaseRatings.on("value", function(snapshot) {
 			var ratings = snapshot.val();
+			callback(FirebaseMessageConverter.convertFromServiceArray(ratings));
+		});
+		
+		this._subscriptionToken["child_added"] = this._firebaseRatings.on("child_added", function(snapshot) {
+			var rating = snapshot.val();
 			callback(FirebaseMessageConverter.convertFromServiceArray(ratings));
 		});
 	}
 	
 	FirebaseRatingService.prototype.unsubscribe = function(){
-		this._firebaseRatings.off("value", this._subscriptionToken);
+		this._firebaseRatings.off("value", this._subscriptionToken["value"]);
+		this._firebaseRatings.off("child_added", this._subscriptionToken["child_added"]);
 	}
 	
 	return FirebaseRatingService;

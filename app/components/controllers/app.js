@@ -16,13 +16,13 @@
                 this._ratingActions = ratingActions;
                 this.ratings = [];
                 
-                var self = this;
                 ratingStore.addChangeListener(function(data){
-                    self.ratings = self._ratingStore.getAll(); 
-                });
+                    this.ratings = this._ratingStore.getAll(); 
+                }.bind(this));
+                
                 ratingStore.addErrorListener(function(errorMessage) {
                     console.log(errorMessage);
-                });
+                });                
             }],
             onInit: function() {
                 this._ratingActions.initApp();

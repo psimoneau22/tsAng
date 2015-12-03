@@ -1,25 +1,19 @@
 ﻿define(function(require) {
     var RatingActions = require("app/actions/ratingActions");
-    
-    // private static rateCount: number = 0;
-    // private _ratingActions: RatingActions;
-    // 
-    // starScale: number[];
-    // hoverIndex: number;
-    //   
-    // @Input() model: Rating;
-    
+        
     var RatingListItem = ng
         .Component({
             selector: 'rating-list-item',
             templateUrl: 'app/components/templates/ratingListItem.html',
-            directives: ng.CORE_DIRECTIVES
+            directives: ng.CORE_DIRECTIVES,
+            inputs: ['model']
         })
         .Class({
-            constructor: [RatingActions, function(ratingActions){
+            constructor: [ng.Inject("RatingActions"), function(ratingActions){
                 this._ratingActions = ratingActions;
                 this.starScale = new Array(10);
                 this.hoverIndex = -1;
+                this.model = {};
             }],
             updateValue: function(value) {
                 this.model.value = value;
@@ -29,6 +23,8 @@
                 this._ratingActions.delete(this.model);
             }
         });
+        
+    RatingListItem.rateCount = 0;
     
     return  RatingListItem;
 });

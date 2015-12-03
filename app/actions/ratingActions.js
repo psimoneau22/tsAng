@@ -20,12 +20,12 @@ define(function(require){
 						rating: result
 					});
 				}
-			}, function(error) {
+			}.bind(this), function(error) {
 				this.error(error);
-        	}
+        	}.bind(this)
 		).catch(function(reason) {
 			this.error(reason);	
-		});
+		}.bind(this));
 	}
 	
 	RatingActions.prototype.update = function(rating){
@@ -36,12 +36,12 @@ define(function(require){
 						rating: result
 					});
 				}
-			}, function(error) {
+			}.bind(this), function(error) {
 				this.error(error);
-        	}
+        	}.bind(this)
 		).catch(function(reason) {
 			this.error(reason);	
-		});
+		}.bind(this));
 	}
 	
 	RatingActions.prototype.delete = function(rating){
@@ -53,12 +53,12 @@ define(function(require){
 						rating: result
 					});
 				}
-			}, function(error) {
+			}.bind(this), function(error) {
 				this.error(error);
-        	}
+        	}.bind(this)
 		).catch(function(reason) {
 			this.error(reason);	
-		});	
+		}.bind(this));	
 	}
 	
 	RatingActions.prototype.getAll = function(rating){
@@ -68,23 +68,23 @@ define(function(require){
 						actionType: RatingActionType.RecievedAll,
 						ratings: result
 					});
-				}, function(error) {
+				}.bind(this), function(error) {
 					this.error(error);
-				}
+				}.bind(this)
 			).catch(function(reason) {
 				this.error(reason);	
-			});
+			}.bind(this));
 		}
 	}
 	
-	RatingActions.prototype.subscribe = function(){
-		var self = this;
-		self._ratingService.subscribe(function(result) {
-			self._dispatcher.handleViewAction({
+	RatingActions.prototype.subscribe = function() {
+		
+		this._ratingService.subscribe(function(result) {
+			this._dispatcher.handleViewAction({
 				actionType: RatingActionType.RecievedAll,
 				ratings: result
 			});
-		});
+		}.bind(this));
 	}
 	
 	RatingActions.prototype.unsubscribe = function(){

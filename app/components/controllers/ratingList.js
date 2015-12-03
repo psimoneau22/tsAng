@@ -1,5 +1,4 @@
-define(function(require){	
-	
+define(function(require){		
 	
 	var RatingListItem = require("app/components/controllers/ratingListItem");
 	
@@ -7,13 +6,13 @@ define(function(require){
 		.Component({
 			selector: 'rating-list',    
 			templateUrl: 'app/components/templates/ratingList.html',
+			inputs: ['model'],
 			directives: [ng.CORE_DIRECTIVES, RatingListItem]
 		})
 		.Class({
 			constructor: function(){
-				this.model = [];
-				//@Input() model: Rating[];
-			}
+				this.model = [];				
+			}			
 		});	
 	
 	return RatingList;
