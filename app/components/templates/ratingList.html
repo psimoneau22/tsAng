@@ -2,6 +2,6 @@
 	<div class="col-xs-1 col-xs-offset-1"><b>Title</b></div>
     <div class="col-xs-2"><b>Description</b></div>
     <div class="col-xs-2"><b>Value</b></div>
-</div>		
+</div>
 <hr>
-<rating-list-item *ng-for="#rating of model" [model]="rating"></rating-list-item>
+<rating-list-item *ng-for="#rating of model" [model]="rating" (on-uber)="somethingIsUber(rating)"></rating-list-item>

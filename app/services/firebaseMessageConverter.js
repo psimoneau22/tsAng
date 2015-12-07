@@ -15,5 +15,5 @@ define(function(require) {
         return result;
     }
     
-    return FireBaseServiceMessageConverter
+    return FireBaseServiceMessageConverter;
 });

@@ -1,12 +1,11 @@
 define(function(require) {
 	
 	var Promise = require("es6-promise").Promise;	
-	var FirebaseMessageConverter = require("app/services/firebaseMessageConverter");	
 	var Rating = require("app/models/rating");	
 	
-	var FirebaseRatingService = ng.Class({
+	var WebApiRatingService = ng.Class({
 		constructor: [ng.Inject("AppConfig"), function(appConfig) {
-			this._firebaseRatings = new Firebase(appConfig.baseUrl + "/ratings");
+			this._url = appConfig.baseUrl + "/ratings";
 			this.subscriptionTokens = {};
 		}]
 	});
