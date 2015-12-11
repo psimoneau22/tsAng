@@ -1,7 +1,7 @@
 define(function(require) {
 	
-	var Promise = require("es6-promise").Promise;	
-	var Rating = require("app/models/rating");	
+	var Promise = require("es6-promise").Promise;
+	var Rating = require("app/models/rating");
 	
 	var WebApiRatingService = ng.Class({
 		constructor: [ng.Inject("AppConfig"), function(appConfig) {
@@ -65,7 +65,7 @@ define(function(require) {
 		var self = this;
 		
 		var result = new Promise(function(resolve, reject) {
-			self._firebaseRatings.child(rating.id).update({
+			self._firebaseRatings.child(rating.id).update({				
 				title: rating.title || null,
 				description: rating.description || null,
 				value: rating.value || null
@@ -76,8 +76,8 @@ define(function(require) {
 				else {
 					resolve(rating);
 				}
-			});			
-		});	
+			});
+		});
 		
 		return result;
 	}

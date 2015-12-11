@@ -24,7 +24,7 @@ define(function(require){
 				self.error(error);
         	}
 		).catch(function(reason) {
-			self.error(reason);	
+			self.error(reason);
 		});
 	}
 	
@@ -35,29 +35,29 @@ define(function(require){
 				self._dispatcher.handleViewAction({
 					actionType: RatingActionType.Update,
 					rating: result
-				});				
+				});
 			}, function(error) {
 				self.error(error);
         	}
 		).catch(function(reason) {
-			self.error(reason);	
+			self.error(reason);
 		});
 	}
 	
 	RatingActions.prototype.delete = function(rating){
 		var self = this;
 		
-		this._ratingService.remove(rating).then(function(result) {				
+		this._ratingService.remove(rating).then(function(result) {
 				self._dispatcher.handleViewAction({
 					actionType: RatingActionType.Delete,
 					rating: result
-				});				
+				});
 			}, function(error) {
 				self.error(error);
         	}
 		).catch(function(reason) {
-			self.error(reason);	
-		});	
+			self.error(reason);
+		});
 	}
 	
 	RatingActions.prototype.getAll = function(){
