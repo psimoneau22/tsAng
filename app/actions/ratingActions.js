@@ -75,14 +75,6 @@ define(function(require){
 			self.error(reason);	
 		});		
 	}
-	
-	RatingActions.prototype.initApp = function(){		
-		this.getAll();
-	}
-	
-	RatingActions.prototype.destroyApp = function(){
-		
-	}
 		
 	RatingActions.prototype.error = function(errorMessage){
 		this._dispatcher.handleViewAction({

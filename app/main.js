@@ -20,6 +20,7 @@
 	};
 	
 	ng.bootstrap(App, [
+		ngHttp.HTTP_PROVIDERS,
 		ng.provide("AppDispatcher", {useClass: AppDispatcher}),
 		ng.provide("RatingStore", {useClass: RatingStore}),
 		ng.provide("RatingActions", {useClass: RatingActions}),

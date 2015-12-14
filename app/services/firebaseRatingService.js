@@ -7,7 +7,6 @@ define(function(require) {
 	var FirebaseRatingService = ng.Class({
 		constructor: [ng.Inject("AppConfig"), function(appConfig) {
 			this._firebaseRatings = new Firebase(appConfig.baseUrl + "/ratings");
-			this.subscriptionTokens = {};
 		}]
 	});
 	

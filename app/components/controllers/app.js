@@ -3,7 +3,7 @@
     var RatingForm = require("app/components/controllers/ratingForm");
     var RatingList = require("app/components/controllers/ratingList");
     
-    var App = ng .Component({
+    var App = ng.Component({
         selector: 'app',    
         templateUrl: 'app/components/templates/app.html',
         directives: [ng.CORE_DIRECTIVES, RatingForm, RatingList]
@@ -37,7 +37,7 @@
             }
         ],
         onInit: function() {
-            this._ratingActions.initApp();
+            this._ratingActions.getAll();
         },
         onDestroy: function() {        
             this.removeChangeListener();
