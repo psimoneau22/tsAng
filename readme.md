@@ -1,3 +1,5 @@
+NOTE This is outdated using OLD alpha versions of angular 2.  The patterns can be reused but most of framework interaction would need to be refactored
+
 Prerequisites
 - [git](https://git-scm.com/)
 - [node/npm](https://nodejs.org/en/)
